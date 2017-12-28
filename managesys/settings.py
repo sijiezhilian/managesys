@@ -119,5 +119,7 @@ MEDIA_URL = '/media/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
-
+CRONJOBS = [
+    ('* 12 * * *', 'django.core.management.call_command', ['checkdate'])
+]
 
