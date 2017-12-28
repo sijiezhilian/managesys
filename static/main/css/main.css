@@ -1,0 +1,145 @@
+.top
+{
+    width: 100%;
+    height: 100px;
+background: #417690;
+    color: white;
+
+}
+.top a
+{color: white;
+
+}
+.med
+{
+    position: absolute;
+    top: 100px;
+    bottom: 40px;
+    left: 0px;
+    right: 0px;
+}
+.left
+{
+    width: 12%;
+    height: 100%;
+
+    display: inline-block;
+    height: 700px;
+
+}
+.right
+{vertical-align:top;
+    width: 87%;
+    height: 100%;
+    display: inline-block;
+    border-left: 1px solid #dfdfdf;
+
+}
+ul, li {
+    list-style: none;
+    margin: 0;
+
+}
+.content
+{
+    text-align: center;
+
+}
+.item
+{text-align: left;
+ width: 1122px;
+    display: inline-block;
+}
+
+.item li {
+    position: relative;
+    display: inline-block;
+    width: 220px;
+    height: 282px;
+    margin: 0 22px 30px;
+    font-size: 12px;
+    background-color: #fff;
+    vertical-align: top;
+    text-align: center;
+}
+.info-top {
+    position: relative;
+    width: 100%;
+    height: 208px;
+}
+.info-bottom {
+    position: relative;
+
+}
+.item img
+{width: 100%;
+height: 100%;
+}
+.shebei-top
+{
+    height: 60px;
+    line-height: 60px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-bottom: 1px solid #dfdfdf;
+    margin-bottom: 5px;
+}
+.menu-one {
+
+    position: relative;
+    width: 9%;
+    height: 31px;
+    float: right;
+    z-index: 1;
+    text-align: center;
+    border:1px solid #dfdfdf;
+    line-height: 31px;
+
+}
+.nav-wrap .nav-logo {
+    width: 25%;
+    height: 100%;
+    float: left;
+    text-align: center;
+    font-size: 22px;
+}
+
+.nav-logo-img {
+    /*background-image: url(../images/TempLogo.png);*/
+    background-repeat: no-repeat;
+    background-size: auto 70px;
+    background-position: center center;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+.nav-wrap .nav-logo {
+    width: 25%;
+    height: 100%;
+    float: left;
+    text-align: center;
+    font-size: 22px;
+}
+
+.left-div
+{
+    height: 30px;
+    width: 100%;
+    font-size: 18px;
+
+
+
+}
+.fen {
+    width: 100%;
+    height: 30px;
+    background: #ccc;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    line-height: 30px;
+}
+.left ul
+{
+    border:1px solid #dfdfdf;
+}
