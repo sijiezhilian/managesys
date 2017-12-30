@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'daterange_filter',
     'django_crontab',
+    'import_export' ,
 
     'main'
 )

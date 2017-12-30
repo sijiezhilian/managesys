@@ -80,7 +80,7 @@ class MacHistoy(models.Model):
     shifouyuqi=models.BooleanField(u'租借时间正常',default=True)
     shenhezhuanugtaichoice=((0,u"待审核"),(1,u"审核通过"),(2,u"已归还"),(3,u"已拒绝"))
     shenhezhuanugtai=models.IntegerField(u"审核状态",choices=shenhezhuanugtaichoice,default=0)
-    beizhu=models.CharField(u"备注",max_length=255)
+    beizhu=models.CharField(u"备注",max_length=255,blank=True)
     mac_f=models.ForeignKey(Macinsh,verbose_name='所借机器')
     jiechuren=models.ForeignKey(ManageUser,verbose_name='借出人',related_name="re_jiechuren")
     shenheren=models.ForeignKey(ManageUser,verbose_name="审核人",related_name="re_shenheren",blank=True,null=True)
