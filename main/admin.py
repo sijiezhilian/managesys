@@ -8,8 +8,9 @@ import models
 
 @admin.register(models.ManageUser)
 class ManageUserAdmin(admin.ModelAdmin):
-    list_display = ("xuehao","gonghao","shouji","youxiang")
-    search_fields=["xuehao","gonghao","shouji","youxiang"]
+    exclude = ['user']
+    list_display = ('yonghuming',"xuehao","gonghao","shouji","youxiang")
+    search_fields=['yonghuming',"xuehao","gonghao","shouji","youxiang"]
 
 
 

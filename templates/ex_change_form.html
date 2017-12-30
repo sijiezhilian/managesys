@@ -11,16 +11,16 @@
     <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <script src="../static/main/js/jquery.page.js"></script>
     <script type="text/javascript" src="/admin/jsi18n/"></script>
-<script type="text/javascript" src="/static/admin/js/core.js"></script>
-<script type="text/javascript" src="/static/admin/js/admin/RelatedObjectLookups.js"></script>
+    <script type="text/javascript" src="/static/admin/js/core.js"></script>
+    <script type="text/javascript" src="/static/admin/js/admin/RelatedObjectLookups.js"></script>
 
-<script type="text/javascript" src="/static/admin/js/jquery.init.js"></script>
-<script type="text/javascript" src="/static/admin/js/actions.js"></script>
-<script type="text/javascript" src="/static/admin/js/calendar.js"></script>
-<script type="text/javascript" src="/static/admin/js/admin/DateTimeShortcuts.js"></script>
-<script type="text/javascript" src="/static/admin/js/related-widget-wrapper.js"></script>
+    <script type="text/javascript" src="/static/admin/js/jquery.init.js"></script>
+    <script type="text/javascript" src="/static/admin/js/actions.js"></script>
+    <script type="text/javascript" src="/static/admin/js/calendar.js"></script>
+    <script type="text/javascript" src="/static/admin/js/admin/DateTimeShortcuts.js"></script>
+    <script type="text/javascript" src="/static/admin/js/related-widget-wrapper.js"></script>
 
-<link rel="stylesheet" type="text/css" href="/static/admin/css/forms.css" />
+    <link rel="stylesheet" type="text/css" href="/static/admin/css/forms.css"/>
 
 </head>
 
@@ -28,14 +28,14 @@
 
 <div class="top">
 
-    <div style="float: right;margin-top: 5px;margin-right: 5px;">当前时间:{% now "Y-m-d f" %} <a href="/logout/">退出系统</a></div>
+    <div style="float: right;margin-top: 5px;margin-right: 5px;">当前时间:{% now "Y-m-d f" %} <a href="/logout/">退出系统</a>
+    </div>
 
     <ul class="top-menu">
 
         <div class="nav-logo nav-logo-img">
             <h1>北师大设备管理系统</h1>
         </div>
-
 
 
         <li class="menu-one">
@@ -45,19 +45,19 @@
     </ul>
 </div>
 <div class="med">
-    <div class="left">
+       <div class="left">
         <ul>
 
             <li class="left-div">设备管理</li>
-            <li><a href="/admin/main/macinsh/">设备列表</a></li>
+            <li><a data-href="/admin/main/macinsh/">设备列表</a></li>
             {% if mgroup == 3 or mgroup == 2 %}
 
-                <li><a href="/admin/main/macinsh/add/">新增设备</a></li>
-                <li><a href="/admin/main/machistoy/">借出纪录</a></li>
+                <li><a data-href="/admin/main/macinsh/add/">新增设备</a></li>
+                <li><a data-href="/admin/main/machistoy/?shenhezhuanugtai__exact=1">借出纪录</a></li>
             {% endif %}
 
             {% ifequal mgroup 2 %}
-                <li><a>借出审核</a></li>
+                <li><a data-href="/admin/main/machistoy/shenheren__id__exact={{ user.id }}&shenhezhuanugtai__exact=0">借出审核</a></li>
             {% endifequal %}
 
 
@@ -68,39 +68,61 @@
 
             <ul>
                 <li class="left-div">器材管理员</li>
-                <li><a href="/admin/main/manageuser/">新增管理员</a></li>
-                <li><a href="/admin/auth/user/?groups__id__exact=2">管理员列表</a></li>
+                <li><a data-href="/admin/main/manageuser/add/?yonghuzhonglei=2">新增管理员</a></li>
+                <li><a data-href="/admin/auth/user/?groups__id__exact=2">管理员列表</a></li>
             </ul>
             <ul>
                 <li class="left-div">用户管理</li>
-                <li><a href="/admin/main/manageuser/">新增用户</a></li>
-                <li><a href="/admin/auth/user/?groups__id__exact=1">用户列表</a></li>
+                <li><a data-href="/admin/main/manageuser/add/?yonghuzhonglei=1">新增用户</a></li>
+                <li><a data-href="/admin/auth/user/?groups__id__exact=1">用户列表</a></li>
             </ul>
         {% endifequal %}
 
         <ul>
             <li class="left-div"> {% if mgroup == 3 or mgroup == 2 %}管理员设置{% elif mgroup == 1 %}个人资料{% endif %}</li>
-            <li><a href="/admin/main/manageuser/{{ request.user.manageuser.id }}/">资料设置</a></li>
-            <li><a href="/admin/password_change/">密码修改</a></li>
+            <li><a data-href="/admin/main/manageuser/{{ request.user.manageuser.id }}/">资料设置</a></li>
+            <li><a data-href="/admin/password_change/">密码修改</a></li>
         </ul>
 
 
     </div>
     <div class="right">
+        <iframe class="iframe" width="100%" height="100%" style="display: none"></iframe>
+
         <div class="shebei-top">借出申请</div>
 
         <div class="content" style="text-align: left;padding-top: 30px;padding-left: 30px">
             <form method="post">
-            {{ form }}
-            <input type="submit"/>
+                {{ form }}
+                <input type="submit"/>
             </form>
         </div>
 
     </div>
 </div>
-   <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
 <script>
-    $(function () {$(".datetimeshortcuts img").attr("src","/static/admin/img/icon_calendar.gif")
+    $(function () {
+        $(".datetimeshortcuts img").attr("src", "/static/admin/img/icon_calendar.gif")
+
+
+        $('.left li').each(function (e) {
+            $(this).click(function (a) {
+
+                $('.shebei-top').hide()
+                $('.content').hide()
+                $('.fen').hide()
+
+
+                var href = $(this).find("a").attr("data-href");
+                console.log(href);
+                $(".iframe").attr("src", href);
+                $(".iframe").show();
+
+            })
+
+        })
+
 
     })
 

@@ -27,7 +27,7 @@
 
 
         <li class="menu-one">
-            <a href="/main/">首页</a>
+            <a href="/main/">总览</a>
         </li>
 
     </ul>
@@ -37,15 +37,15 @@
         <ul>
 
             <li class="left-div">设备管理</li>
-            <li><a href="/admin/main/macinsh/">设备列表</a></li>
+            <li><a data-href="/admin/main/macinsh/">设备列表</a></li>
             {% if mgroup == 3 or mgroup == 2 %}
 
-                <li><a href="/admin/main/macinsh/add/">新增设备</a></li>
-                <li><a href="/admin/main/machistoy/?shenhezhuanugtai__exact=1">借出纪录</a></li>
+                <li><a data-href="/admin/main/macinsh/add/">新增设备</a></li>
+                <li><a data-href="/admin/main/machistoy/?shenhezhuanugtai__exact=1">借出纪录</a></li>
             {% endif %}
 
             {% ifequal mgroup 2 %}
-                <li><a href="/admin/main/machistoy/shenheren__id__exact={{ user.id }}&shenhezhuanugtai__exact=0">借出审核</a></li>
+                <li><a data-href="/admin/main/machistoy/shenheren__id__exact={{ user.id }}&shenhezhuanugtai__exact=0">借出审核</a></li>
             {% endifequal %}
 
 
@@ -56,25 +56,28 @@
 
             <ul>
                 <li class="left-div">器材管理员</li>
-                <li><a href="/admin/main/manageuser/">新增管理员</a></li>
-                <li><a href="/admin/auth/user/?groups__id__exact=2">管理员列表</a></li>
+                <li><a data-href="/admin/main/manageuser/add/?yonghuzhonglei=2">新增管理员</a></li>
+                <li><a data-href="/admin/auth/user/?groups__id__exact=2">管理员列表</a></li>
             </ul>
             <ul>
                 <li class="left-div">用户管理</li>
-                <li><a href="/admin/main/manageuser/">新增用户</a></li>
-                <li><a href="/admin/auth/user/?groups__id__exact=1">用户列表</a></li>
+                <li><a data-href="/admin/main/manageuser/add/?yonghuzhonglei=1">新增用户</a></li>
+                <li><a data-href="/admin/auth/user/?groups__id__exact=1">用户列表</a></li>
             </ul>
         {% endifequal %}
 
         <ul>
             <li class="left-div"> {% if mgroup == 3 or mgroup == 2 %}管理员设置{% elif mgroup == 1 %}个人资料{% endif %}</li>
-            <li><a href="/admin/main/manageuser/{{ request.user.manageuser.id }}/">资料设置</a></li>
-            <li><a href="/admin/password_change/">密码修改</a></li>
+            <li><a data-href="/admin/main/manageuser/{{ request.user.manageuser.id }}/">资料设置</a></li>
+            <li><a data-href="/admin/password_change/">密码修改</a></li>
         </ul>
 
 
     </div>
     <div class="right">
+        
+        <iframe class="iframe" width="100%" height="100%" style="display: none"></iframe>
+
         <div class="shebei-top">设备列表<span style="float: right">
             <a href="{{ request.path }}">全部</a>丨
             <a href="{{ request.path }}?status=0" class="statue">借出</a>丨
@@ -167,7 +170,29 @@
 
 
 
-    setPages()
+
+
+    $(function () {
+        setPages()
+        $('.left li').each(function (e) {
+        $(this).click(function (a) {
+
+            $('.shebei-top').hide()
+            $('.content').hide()
+            $('.fen').hide()
+
+
+            var href=$(this).find("a").attr("data-href");
+            console.log(href);
+            $(".iframe").attr("src",href);
+            $(".iframe").show();
+
+        })
+
+    })
+
+    })
+
 </script>
 </body>
 </html>

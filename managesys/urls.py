@@ -25,5 +25,7 @@ urlpatterns = [
     url(r'^index/', views.index),
     url(r'^main/', views.sysmain),
     url(r'^add_form/', views.new_form),
-    url(r"^logout/", views.logout)
+    url(r"^logout/", views.logout),
+url(r"^ifm/", views.ifm),
+    url(r"^resign/", views.resign),
 ]

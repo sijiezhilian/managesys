@@ -17,14 +17,15 @@ class keshi(models.Model):
         verbose_name = u"科室管理"
         verbose_name_plural = u"科室管理"
 class ManageUser(models.Model):
-    user=models.OneToOneField(User, on_delete=models.CASCADE)
+    user=models.OneToOneField(User, on_delete=models.CASCADE,blank=True,null=True)
+    yonghuming=models.CharField(u"用户名",help_text="只能为英文和数字。默认密码123456",max_length=50)
     name=models.CharField(u'姓名',max_length=255,blank=True)
     xuehao=models.CharField(u'学号',max_length=255,blank=True)
     gonghao=models.CharField(u"工号",max_length=255,blank=True)
     shouji=models.CharField(u"手机",max_length=255)
     youxiang=models.EmailField(u"邮箱",max_length=255,blank=True)
     yonghuzhongleichoic = ((1, "用户"), (2, "科室管理员"), (3, "系统管理员"))
-    keshi_f=models.ForeignKey(keshi,verbose_name='所属科室')
+    keshi_f=models.ForeignKey(keshi,verbose_name='所属科室',blank=True,null=True)
     yonghuzhonglei=models.IntegerField(u'用户种类',choices=yonghuzhongleichoic,default=0)
 
     class Meta:
@@ -35,10 +36,19 @@ class ManageUser(models.Model):
         return self.name
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
+        user = User.objects.create_user(self.yonghuming, self.youxiang, '123456')
+        self.user=user
+
+
+
+
+
+
+
         self.user.groups.clear()
         self.user.groups.add(Group.objects.get(id=self.yonghuzhonglei))
         if(self.yonghuzhonglei==1):
-            self.user.is_staff==False
+            self.user.is_staff==True
         if(self.yonghuzhonglei==2 or self.yonghuzhonglei==3):
             self.user.is_staff==True
         self.user.save()

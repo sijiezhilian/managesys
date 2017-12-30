@@ -36,7 +36,7 @@ def index(request):
 
 @login_required
 def sysmain(request):
-  
+
     zhuangtai = request.GET.get("status", 0)
     q = request.GET.get("q", None)
 
@@ -95,3 +95,37 @@ def new_form(request):
 def logout(request):
     auth.logout(request)
     return HttpResponseRedirect("/index/")
+def ifm(request):
+    return render(request,'ifm.html')
+
+def resign(request):
+    if request.method == "GET":
+
+        return render(request,'resign.html')
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        youxiang=request.POST.get('youxiang',"")
+        xingming=request.POST.get('xingming',"")
+        xuehao=request.POST.get('xuehao',"")
+        gonghao=request.POST.get('gonghao','')
+
+
+
+        if(User.objects.filter(username=username).exists()):
+            return render(request,'resign.html',{"username_is_exists":True})
+
+        man=ManageUser.objects.create(yonghuming=username,
+                                   youxiang=youxiang,
+                                   name=xingming,
+                                   xuehao=xuehao,
+                                   gonghao=gonghao,
+                                   yonghuzhonglei=1
+                                   )
+
+        man.user.set_password(password)
+        man.user.save()
+        user = auth.authenticate(username=username, password=password)
+        auth.login(request, user)
+
+        return HttpResponseRedirect(request.GET.get("next_to", '/main/'))

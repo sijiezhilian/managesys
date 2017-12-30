@@ -2,18 +2,19 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
+from django.conf import settings
 
 
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('main', '0003_auto_20171228_2308'),
+        ('main', '0001_initial'),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='machistoy',
-            name='shifouyuqi',
-            field=models.BooleanField(default=True, verbose_name='\u79df\u501f\u65f6\u95f4\u6b63\u5e38'),
+            model_name='manageuser',
+            name='user',
+            field=models.OneToOneField(null=True, blank=True, to=settings.AUTH_USER_MODEL),
         ),
     ]
