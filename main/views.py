@@ -153,6 +153,7 @@ def resign(request):
         return render(request,'resign.html')
     if request.method == 'POST':
         username = request.POST.get('username')
+        shouji=request.POST.get("shouji")
         password = request.POST.get('password')
         youxiang=request.POST.get('youxiang',"")
         xingming=request.POST.get('xingming',"")
@@ -169,6 +170,7 @@ def resign(request):
                                    name=xingming,
                                    xuehao=xuehao,
                                    gonghao=gonghao,
+                                      shouji=shouji,
                                    yonghuzhonglei=1
                                    )
 
