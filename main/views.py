@@ -71,6 +71,8 @@ def new_form(request):
             a = request.user.groups.all()[0].id
         except IndexError:
             a = 1
+        id=request.GET.get("id")
+        q=Macinsh.objects.get(id=id)
         b='''
         <link type="text/css" href="http://code.jquery.com/ui/1.9.1/themes/smoothness/jquery-ui.css" rel="stylesheet" />
 
@@ -116,7 +118,11 @@ def new_form(request):
             %s
                 <input type="submit"/>
             </form>
-        '''%(addForm().as_ul())
+            <div style="text-align: left;padding-top: 30px;padding-left: 30px ;list-style: none;margin: 0;">
+            <img src="%s"></img>
+            %s
+            <div>
+        '''%(addForm().as_ul(),q.image.url,macForm(instance=q).as_ul())
         return HttpResponse(b)
     if request.method == "POST":
         form = addForm(request.POST)
