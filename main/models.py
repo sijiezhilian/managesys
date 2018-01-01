@@ -51,6 +51,7 @@ class ManageUser(models.Model):
             self.user.is_staff==True
         if(self.yonghuzhonglei==2 or self.yonghuzhonglei==3):
             self.user.is_staff==True
+        self.user.is_staff == True
         self.user.save()
 
         return  models.Model.save(self, force_insert=force_insert, force_update=force_update, using=using,

@@ -31,15 +31,15 @@
                     <li><a href="#" data-href="/admin/main/machistoy/?shenhezhuanugtai__exact=1">借出纪录</a></li>
                     {% ifequal mgroup 2 %}
                         <li>
-                            <a  href="#" data-href="/admin/main/machistoy/shenheren__id__exact={{ user.id }}&shenhezhuanugtai__exact=0">借出审核</a>
+                            <a  href="#" data-href="/admin/main/machistoy/?shenheren__id__exact={{ user.id }}&shenhezhuanugtai__exact=0">借出审核</a>
                         </li>
                     {% endifequal %}
                     {% ifequal mgroup 1 %}
                         <li>
-                            <a href="#" data-href="/admin/main/machistoy/jiechuren__id__exact={{ user.id }}&shenhezhuanugtai__exact=1">已借入列表</a>
+                            <a href="#" data-href="/admin/main/machistoy/?jiechuren__id__exact={{ user.id }}&shenhezhuanugtai__exact=1">已借入列表</a>
                         </li>
                         <li>
-                            <a href="#" data-href="/admin/main/machistoy/jiechuren__id__exact={{ user.id }}&shenhezhuanugtai__exact=2">已归还列表</a>
+                            <a href="#" data-href="/admin/main/machistoy/?jiechuren__id__exact={{ user.id }}&shenhezhuanugtai__exact=2">已归还列表</a>
                         </li>
 
                     {% endifequal %}
