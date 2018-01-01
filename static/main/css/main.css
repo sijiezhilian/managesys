@@ -6,10 +6,7 @@ background: #417690;
     color: white;
 
 }
-.top a
-{color: white;
 
-}
 .med
 {
     position: absolute;
@@ -51,17 +48,7 @@ ul, li {
     display: inline-block;
 }
 
-.item li {
-    position: relative;
-    display: inline-block;
-    width: 220px;
-    height: 282px;
-    margin: 0 22px 30px;
-    font-size: 12px;
-    background-color: #fff;
-    vertical-align: top;
-    text-align: center;
-}
+
 .info-top {
     position: relative;
     width: 100%;

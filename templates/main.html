@@ -2,37 +2,124 @@
 <html lang="cn">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>实验设备借用管理系统</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link href="../static/main/css/main.css" rel="stylesheet" type="text/css">
     <link href="../static/main/css/page.css" rel="stylesheet" type="text/css">
-
+    <link href="../static/imp/css/common.css" rel="stylesheet" type="text/css">
     <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <script src="../static/main/js/jquery.page.js"></script>
 </head>
 
 <body>
 
-<div class="top">
+<div class="header">
+    <h1><a href="#"><img src="../static/imp/images/logo.png" alt="实验设备借用管理系统"/></a></h1>
+    <div class="time">{% now "Y-m-d f" %}<Br/><a href="#">系统首页</a>&nbsp;|&nbsp;<a href="/logout/">退出系统</a></div>
 
-    <div style="float: right;margin-top: 5px;margin-right: 5px;">当前时间:{% now "Y-m-d f" %} <a href="/logout/" >退出系统</a></div>
+</div>
+<div class="container-left">
+    <ul class="nav-left">
+        <li class="now">
+            <a href="#">设备管理</a>
+            <ul class="sub">
 
-    <ul class="top-menu">
+                {% if mgroup == 3 or mgroup == 2 %}
+                    <li><a href="/main/">设备列表</a></li>
+                    <li><a href="#" data-href="/admin/main/macinsh/add/">新增设备</a></li>
+                    <li><a href="#" data-href="/admin/main/machistoy/?shenhezhuanugtai__exact=1">借出纪录</a></li>
+                    {% ifequal mgroup 2 %}
+                        <li>
+                            <a  href="#" data-href="/admin/main/machistoy/shenheren__id__exact={{ user.id }}&shenhezhuanugtai__exact=0">借出审核</a>
+                        </li>
+                    {% endifequal %}
+                    {% ifequal mgroup 1 %}
+                        <li>
+                            <a href="#" data-href="/admin/main/machistoy/jiechuren__id__exact={{ user.id }}&shenhezhuanugtai__exact=1">已借入列表</a>
+                        </li>
+                        <li>
+                            <a href="#" data-href="/admin/main/machistoy/jiechuren__id__exact={{ user.id }}&shenhezhuanugtai__exact=2">已归还列表</a>
+                        </li>
 
-        <div class="nav-logo nav-logo-img">
-            <h1>北师大设备管理系统</h1>
-        </div>
+                    {% endifequal %}
+                {% endif %}
+            </ul>
 
-
-
-        <li class="menu-one">
-            <a href="/main/">总览</a>
         </li>
+        {% ifequal mgroup 3 %}
+
+
+            <li class="now">
+                <a href="#">器材管理员</a>
+                <ul class="sub">
+
+                    <li><a  href="#" data-href="/admin/main/manageuser/add/?yonghuzhonglei=2">新增管理员</a></li>
+                    <li><a href="#"  data-href="/admin/auth/user/?groups__id__exact=2">管理员列表</a></li>
+                </ul>
+            </li>
+            <li class="now">
+                <a href="#">用户管理</a>
+                <ul class="sub">
+
+                    <li><a  href="#" data-href="/admin/main/manageuser/add/?yonghuzhonglei=1">新增用户</a></li>
+                    <li><a  href="#" data-href="/admin/auth/user/?groups__id__exact=1">用户列表</a></li>
+                </ul>
+            </li>
+        {% endifequal %}
+        <li class="now">
+            <a href="#"> {% if mgroup == 3 or mgroup == 2 %}管理员设置{% elif mgroup == 1 %}个人资料{% endif %}</a>
+
+            <ul class="sub">
+                <li><a  href="#" data-href="/admin/main/manageuser/{{ request.user.manageuser.id }}/">资料设置</a></li>
+                <li><a  href="#" data-href="/admin/password_change/">密码修改</a></li>
+            </ul>
+        </li>
+
 
     </ul>
 </div>
-<div class="med">
+
+<!--左侧代码-->
+<div class="container-right">
+
+    <iframe class="iframe" width="100%" height="100%" style="display: none"></iframe>
+    <div class="shebei-top">设备列表<span style="float: right">
+            <a href="{{ request.path }}">全部</a>丨
+            <a href="{{ request.path }}?status=0" class="statue">借出</a>丨
+            <a href="{{ request.path }}?status=1" class="statue">待审核</a> 丨
+            <a href="{{ request.path }}?status=2" class="statue">在库</a></span></div>
+    <div class="content">
+     <form id="changelist-search" action="" method="get" style="text-align: left">
+                <div><!-- DIV needed for valid HTML -->
+                    <label for="searchbar"><img src="/static/admin/img/icon_searchbox.png" alt="Search"></label>
+                    <input type="text" size="40" name="q" value="" id="searchbar">
+                    <input type="submit" value="搜索">
+
+
+                </div>
+            </form>
+        <ul class="shebei-list">
+            {% for machine in machines %}
+
+
+
+                <li>
+                    <a href="{% if mgroup == 1 %}/add_form/?id=
+                        {{ foo.id }}{% else %}/admin/main/macinsh/{{ foo.id }}/{% endif %}"><img
+                            src="{% if foo.image %}{{ foo.image.url }}{% endif %}" alt=""/></a>
+                    <div class="info">
+                        设备名称：{{ foo.name }}<br>
+                        当前状态：{{ foo.get_zhuangtai_display }}
+                    </div>
+                </li>
+            {% endfor %}
+
+        </ul>
+    </div>
+
+</div>
+<div class="med" style="display: none">
     <div class="left">
         <ul>
 
@@ -45,7 +132,15 @@
             {% endif %}
 
             {% ifequal mgroup 2 %}
-                <li><a data-href="/admin/main/machistoy/shenheren__id__exact={{ user.id }}&shenhezhuanugtai__exact=0">借出审核</a></li>
+                <li><a data-href="/admin/main/machistoy/shenheren__id__exact={{ user.id }}&shenhezhuanugtai__exact=0">借出审核</a>
+                </li>
+            {% endifequal %}
+            {% ifequal mgroup 1 %}
+                <li><a data-href="/admin/main/machistoy/jiechuren__id__exact={{ user.id }}&shenhezhuanugtai__exact=1">已借入列表</a>
+                </li>
+                <li><a data-href="/admin/main/machistoy/jiechuren__id__exact={{ user.id }}&shenhezhuanugtai__exact=2">已归还列表</a>
+                </li>
+
             {% endifequal %}
 
 
@@ -75,7 +170,7 @@
 
     </div>
     <div class="right">
-        
+
         <iframe class="iframe" width="100%" height="100%" style="display: none"></iframe>
 
         <div class="shebei-top">设备列表<span style="float: right">
@@ -85,18 +180,19 @@
             <a href="{{ request.path }}?status=2" class="statue">在库</a></span></div>
 
         <div class="content">
-        <form id="changelist-search" action="" method="get" style="text-align: left">
-<div><!-- DIV needed for valid HTML -->
-<label for="searchbar"><img src="/static/admin/img/icon_searchbox.png" alt="Search"></label>
-<input type="text" size="40" name="q" value="" id="searchbar">
-<input type="submit" value="搜索">
+            <form id="changelist-search" action="" method="get" style="text-align: left">
+                <div><!-- DIV needed for valid HTML -->
+                    <label for="searchbar"><img src="/static/admin/img/icon_searchbox.png" alt="Search"></label>
+                    <input type="text" size="40" name="q" value="" id="searchbar">
+                    <input type="submit" value="搜索">
 
 
-</div>
-</form>
+                </div>
+            </form>
             <ul class="item">
                 {% for foo in  machines %}
-                    <li><a href="{% if mgroup == 1 %}/add_form/?id={{ foo.id }}{% else %}/admin/main/macinsh/{{ foo.id }}/{% endif %}">
+                    <li><a href="{% if mgroup == 1 %}/add_form/?id=
+                        {{ foo.id }}{% else %}/admin/main/macinsh/{{ foo.id }}/{% endif %}">
                         <div class="info-top"><img src="{% if foo.image %}{{ foo.image.url }}{% endif %}"/></div>
                         <div class="info-bottom">
                             <div class="item-name">{{ foo.name }}</div>
@@ -123,17 +219,15 @@
         var pattern = arg + '=([^&]*)';
         var replaceText = arg + '=' + arg_val;
         if (url.match(pattern)) {
-            if(arg_val==undefined)
-            {
-                replaceText=""
+            if (arg_val == undefined) {
+                replaceText = ""
 
             }
             var tmp = '/(' + arg + '=)([^&]*)/gi';
             tmp = url.replace(eval(tmp), replaceText);
             return tmp;
         } else {
-           if(arg_val==undefined)
-            {
+            if (arg_val == undefined) {
                 return url
 
             }
@@ -168,28 +262,24 @@
     }
 
 
-
-
-
-
     $(function () {
         setPages()
-        $('.left li').each(function (e) {
-        $(this).click(function (a) {
+        $('.sub li').each(function (e) {
+            $(this).click(function (a) {
 
-            $('.shebei-top').hide()
-            $('.content').hide()
-            $('.fen').hide()
+                $('.shebei-top').hide()
+                $('.content').hide()
+                $('.fen').hide()
 
 
-            var href=$(this).find("a").attr("data-href");
-            console.log(href);
-            $(".iframe").attr("src",href);
-            $(".iframe").show();
+                var href = $(this).find("a").attr("data-href");
+                console.log(href);
+                $(".iframe").attr("src", href);
+                $(".iframe").show();
+
+            })
 
         })
-
-    })
 
     })
 

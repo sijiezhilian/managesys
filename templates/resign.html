@@ -184,19 +184,22 @@
                             <i class="fa fa-user"></i>
                         </div>
                         <div class="form-group">
-                            <input name="xuehao" type="text" class="form-control" id="username" placeholder="学号(没有留空)">
+                            <input name="xuehao" type="text" class="form-control" id="username" placeholder="学号(学号与工号二选一)">
                             <i class="fa fa-user"></i>
                         </div>
                         <div class="form-group">
-                            <input name="gonghao" type="text" class="form-control" id="username" placeholder="工号(没有留空)"  >
+                            <input name="gonghao" type="text" class="form-control" id="username" placeholder="工号(学号与工号二选一)" >
                             <i class="fa fa-user"></i>
                         </div>
                         <div class="form-group">
-                            <input name="youxiang" type="text" class="form-control" id="username" placeholder="邮箱">
+                            <input name="youxiang" type="text" class="form-control" id="username" placeholder="邮箱"
+                                   required pattern="[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?"
+                            oninvalid="validatelt(this,'邮箱不正确')"
+                            >
                             <i class="fa fa-user"></i>
                         </div>
                         <div class="form-group">
-                            <input name="xingming" type="text" class="form-control" id="username" placeholder="姓名">
+                            <input name="xingming" type="text" class="form-control" id="username" placeholder="姓名" required>
                             <i class="fa fa-user"></i>
                         </div>
                         <div class="form-group help">

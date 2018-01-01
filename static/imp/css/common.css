@@ -1,0 +1,41 @@
+@charset "utf-8";
+html{width:100%;height:100%;margin:0;padding:0;overflow-x:hidden;}
+body{width:100%;margin:0 auto;background:#fff url('../images/bodybg.jpg') center top no-repeat;text-align:center;font:14px "Microsoft Yahei","微软雅黑",Arial,"宋体",sans-serif;height:100%;color:#555;width:100%;padding:0;_overflow-x:hidden;}
+body.homepage{ margin:0 auto;background:#fff;}
+a:link,a:visited{color:#363636;text-decoration:none;}
+a:hover{color:#0c8bf1;}
+.sub a{background: #6ea0fd;}
+img,a img{border:none;vertical-align:middle;}
+li,ul{list-style:none;}
+li,ul,form{margin:0;padding:0;}
+input,select{font-size:12px;vertical-align:middle;}
+.hidden{display:none;}
+h3{font-size:14px;}
+a,area { blr:expression(this.onFocus=this.blur()) } /* for IE */
+:focus { outline: none; } /* for Firefox */ 
+strong,b{font-weight:normal;}
+#blank{width:100%;height:82px;}
+
+.header{width:100%;position:relative;height:116px;background:url('../images/navbg.gif') 0 0 repeat-x;}
+.header h1{margin:0;padding:0;float:left;position:relative;left:20px;}
+.header .time{position:absolute;right:40px;top:20px;color:#fff;font-size:14px;line-height:30px;text-align:right;}
+.header .time a:link,.header .time a:visited{color:#fff;}
+
+.container-left{width:17%;height:100%;background:#1f55b9;float:left;text-align:left;}
+.container-left ul.nav-left{width:100%;float:left;}
+.container-left ul.nav-left li{width:100%;min-height:40px;text-indent:15px;margin-bottom:1px;}
+.container-left ul.nav-left li a:link,.container-left ul.nav-left li a:visited{display:block;width:100%;height:100%;line-height:40px;background:#437eec;color:#fff;}
+.container-left ul.nav-left li.now a:link,.container-left ul.nav-left li.now a:visited{background:#2d6adc;}
+.container-left ul.nav-left li a:hover{background:#2d6adc;}
+.container-left ul.nav-left li ul. sub{width:100%;display:none;}
+.container-left ul.nav-left li.now ul.sub{display:block;}
+.container-left ul.nav-left li ul.sub li{width:100%;height:30px;min-height:30px;line-height:30px;margin:0;}
+.container-left ul.nav-left li ul.sub li a:link,.container-left ul.nav-left li ul.sub li a:visited{width:100%;height:30px;line-height:30px;background:#6ea0fd;}
+.container-left ul.nav-left li ul.sub li a:hover{background:#87b1fe;}
+.container-right{width:83%;float:left;height: 400px;}
+.container-right .title{width:90%;height:40px;text-align:left;line-height:30px;font-size:16px;margin:20px auto 10px auto;}
+.container-right .content{width:90%;margin:0 auto;}
+.container-right .content ul.shebei-list{width:100%;}
+.container-right .content ul.shebei-list li{width:33%;margin-bottom:20px;float:left;text-align:left;line-height:28px;}
+.container-right .content ul.shebei-list li img{width:80%;height:auto;padding:1px;border:1px solid #ccc;}
+.container-right .content .info{font-size:14px;line-height:23px;padding:10px 0 0;}

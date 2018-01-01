@@ -2,7 +2,7 @@
 <html lang="cn">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>实验设备借用管理系统</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link href="../static/main/css/main.css" rel="stylesheet" type="text/css">
@@ -26,24 +26,72 @@
 
 <body>
 
-<div class="top">
+<div class="header">
+    <h1><a href="#"><img src="../static/imp/images/logo.png" alt="实验设备借用管理系统"/></a></h1>
+    <div class="time">{% now "Y-m-d f" %}<Br/><a href="#">系统首页</a>&nbsp;|&nbsp;<a href="/logout/">退出系统</a></div>
 
-    <div style="float: right;margin-top: 5px;margin-right: 5px;">当前时间:{% now "Y-m-d f" %} <a href="/logout/">退出系统</a>
-    </div>
+</div>
+<div class="container-left">
+    <ul class="nav-left">
+        <li class="now">
+            <a href="#">设备管理</a>
+            <ul class="sub">
 
-    <ul class="top-menu">
+                {% if mgroup == 3 or mgroup == 2 %}
+                    <li><a href="/main/">设备列表</a></li>
+                    <li><a href="#" data-href="/admin/main/macinsh/add/">新增设备</a></li>
+                    <li><a href="#" data-href="/admin/main/machistoy/?shenhezhuanugtai__exact=1">借出纪录</a></li>
+                    {% ifequal mgroup 2 %}
+                        <li>
+                            <a  href="#" data-href="/admin/main/machistoy/shenheren__id__exact={{ user.id }}&shenhezhuanugtai__exact=0">借出审核</a>
+                        </li>
+                    {% endifequal %}
+                    {% ifequal mgroup 1 %}
+                        <li>
+                            <a href="#" data-href="/admin/main/machistoy/jiechuren__id__exact={{ user.id }}&shenhezhuanugtai__exact=1">已借入列表</a>
+                        </li>
+                        <li>
+                            <a href="#" data-href="/admin/main/machistoy/jiechuren__id__exact={{ user.id }}&shenhezhuanugtai__exact=2">已归还列表</a>
+                        </li>
 
-        <div class="nav-logo nav-logo-img">
-            <h1>北师大设备管理系统</h1>
-        </div>
+                    {% endifequal %}
+                {% endif %}
+            </ul>
 
-
-        <li class="menu-one">
-            <a href="/main/">首页</a>
         </li>
+        {% ifequal mgroup 3 %}
+
+
+            <li class="now">
+                <a href="#">器材管理员</a>
+                <ul class="sub">
+
+                    <li><a  href="#" data-href="/admin/main/manageuser/add/?yonghuzhonglei=2">新增管理员</a></li>
+                    <li><a href="#"  data-href="/admin/auth/user/?groups__id__exact=2">管理员列表</a></li>
+                </ul>
+            </li>
+            <li class="now">
+                <a href="#">用户管理</a>
+                <ul class="sub">
+
+                    <li><a  href="#" data-href="/admin/main/manageuser/add/?yonghuzhonglei=1">新增用户</a></li>
+                    <li><a  href="#" data-href="/admin/auth/user/?groups__id__exact=1">用户列表</a></li>
+                </ul>
+            </li>
+        {% endifequal %}
+        <li class="now">
+            <a href="#"> {% if mgroup == 3 or mgroup == 2 %}管理员设置{% elif mgroup == 1 %}个人资料{% endif %}</a>
+
+            <ul class="sub">
+                <li><a  href="#" data-href="/admin/main/manageuser/{{ request.user.manageuser.id }}/">资料设置</a></li>
+                <li><a  href="#" data-href="/admin/password_change/">密码修改</a></li>
+            </ul>
+        </li>
+
 
     </ul>
 </div>
+
 <div class="med">
        <div class="left">
         <ul>
@@ -59,6 +107,11 @@
             {% ifequal mgroup 2 %}
                 <li><a data-href="/admin/main/machistoy/shenheren__id__exact={{ user.id }}&shenhezhuanugtai__exact=0">借出审核</a></li>
             {% endifequal %}
+        {% ifequal mgroup 1 %}
+                <li><a data-href="/admin/main/machistoy/jiechuren__id__exact={{ user.id }}&shenhezhuanugtai__exact=1">已借入列表</a></li>
+                <li><a data-href="/admin/main/machistoy/jiechuren__id__exact={{ user.id }}&shenhezhuanugtai__exact=2">已归还列表</a></li>
+
+        {% endifequal %}
 
 
         </ul>
