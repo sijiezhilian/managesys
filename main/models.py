@@ -1,6 +1,7 @@
 #coding:utf-8
 
 from django.contrib.auth.models import User, Group
+from django.core.mail import send_mail
 from django.db import models
 
 # Create your models here.
@@ -102,7 +103,9 @@ class MacHistoy(models.Model):
             self.mac_f.zhuangtai = 0
         self.mac_f.save()
         if(self.shifouyuqi==True):
-            sendmail([self.shenheren.youxiang],self.jiechuren.name+u"提交了申请请注意审核")
+            send_mail(self.jiechuren.name+u"提交了申请请注意审核", self.jiechuren.name+u"提交了申请请注意审核", 'p564398853@163.com',
+                      [self.shenheren.youxiang], fail_silently=False)
+
         return models.Model.save(self, force_insert=force_insert, force_update=force_update, using=using,
                                  update_fields=update_fields)
 
