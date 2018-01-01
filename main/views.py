@@ -111,6 +111,8 @@ def new_form(request):
     li{
         margin-bottom: 20px;
     }
+    form li
+    {display: inline-block;}
 
   </style>
          <form method="post" style="text-align: left;padding-top: 30px;padding-left: 30px ;list-style: none;
