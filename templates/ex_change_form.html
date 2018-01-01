@@ -68,6 +68,7 @@
 
                     <li><a  href="#" data-href="/admin/main/manageuser/add/?yonghuzhonglei=2">新增管理员</a></li>
                     <li><a href="#"  data-href="/admin/auth/user/?groups__id__exact=2">管理员列表</a></li>
+                       <li><a href="#" data-href="/admin/main/keshi/">科室管理</a></li>
                 </ul>
             </li>
             <li class="now">
@@ -157,6 +158,17 @@
 </div>
 <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
 <script>
+    function reinitIframe(){
+var iframe = document.getElementById("test");
+var contain=$("#contain")
+try{
+var bHeight = iframe.contentWindow.document.body.scrollHeight;
+var dHeight = iframe.contentWindow.document.documentElement.scrollHeight;
+var height = Math.max(bHeight, dHeight);
+contain.css("height",height)
+console.log(height);
+}catch (ex){}
+}
     $(function () {
         $(".datetimeshortcuts img").attr("src", "/static/admin/img/icon_calendar.gif")
 
@@ -173,6 +185,7 @@
                 console.log(href);
                 $(".iframe").attr("src", href);
                 $(".iframe").show();
+                  window.setInterval("reinitIframe()", 200);
 
             })
 

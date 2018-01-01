@@ -16,7 +16,7 @@
 
 <div class="header">
     <h1><a href="#"><img src="../static/imp/images/logo.png" alt="实验设备借用管理系统"/></a></h1>
-    <div class="time">{% now "Y-m-d f" %}<Br/><a href="/logout/">退出系统</a></div>
+    <div class="time">{% now "Y-m-d f" %}<Br/>你好:{{ request.user.username}} <a href="/logout/">退出系统</a></div>
 
 </div>
 <div class="container-left">
@@ -56,6 +56,7 @@
 
                     <li><a  href="#" data-href="/admin/main/manageuser/add/?yonghuzhonglei=2">新增管理员</a></li>
                     <li><a href="#"  data-href="/admin/auth/user/?groups__id__exact=2">管理员列表</a></li>
+                       <li><a href="#" data-href="/admin/main/keshi/">科室管理</a></li>
                 </ul>
             </li>
             <li class="now">
@@ -81,9 +82,9 @@
 </div>
 
 <!--左侧代码-->
-<div class="container-right">
+<div class="container-right" id="contain">
 
-    <iframe class="iframe" width="100%" height="100%" style="display: none;border:none"></iframe>
+    <iframe class="iframe" id="test" width="100%" height="100%" style="display: none;border:none"></iframe>
     <div class="shebei-top">设备列表<span style="float: right">
             <a href="{{ request.path }}">全部</a>丨
             <a href="{{ request.path }}?status=0" class="statue">借出</a>丨
@@ -106,12 +107,13 @@
 
                 <li>
                     <a href="{% if mgroup == 1 %}/add_form/?id=
-                        {{ foo.id }}{% else %}/admin/main/macinsh/{{ foo.id }}/{% endif %}"><img
-                            src="{% if foo.image %}{{ foo.image.url }}{% endif %}" alt=""/></a>
+                        {{ foo.id }}{% else %}/admin/main/macinsh/{{ machine.id }}/{% endif %}"><img
+                            src="{% if machine.image %}{{ machine.image.url }}{% endif %}" alt=""/>
                     <div class="info">
-                        设备名称：{{ foo.name }}<br>
-                        当前状态：{{ foo.get_zhuangtai_display }}
+                        设备名称：{{ machine.name }}<br>
+                        当前状态：{{ machine.get_zhuangtai_display }}
                     </div>
+                    </a>
                 </li>
             {% endfor %}
 
@@ -261,8 +263,21 @@
         });
     }
 
-
+function reinitIframe(){
+var iframe = document.getElementById("test");
+var contain=$("#contain")
+try{
+var bHeight = iframe.contentWindow.document.body.scrollHeight;
+var dHeight = iframe.contentWindow.document.documentElement.scrollHeight;
+var height = Math.max(bHeight, dHeight);
+contain.css("height",height)
+console.log(height);
+}catch (ex){}
+}
     $(function () {
+
+
+
         setPages()
         $('.sub li').each(function (e) {
             $(this).click(function (a) {
@@ -276,6 +291,7 @@
                 console.log(href);
                 $(".iframe").attr("src", href);
                 $(".iframe").show();
+                window.setInterval("reinitIframe()", 200);
 
             })
 
