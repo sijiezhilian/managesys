@@ -8,15 +8,22 @@
     <link href="../static/main/css/main.css" rel="stylesheet" type="text/css">
     <link href="../static/main/css/page.css" rel="stylesheet" type="text/css">
     <link href="../static/imp/css/common.css" rel="stylesheet" type="text/css">
+     <link href="../static/main/css/jquery-ui-timepicker-addon.css" type="text/css" />
+
     <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+      <script type="text/javascript" src="http://code.jquery.com/ui/1.9.1/jquery-ui.min.js"></script>
     <script src="../static/main/js/jquery.page.js"></script>
+
+    <script src="../static/main/js/jquery-ui-timepicker-addon.js"></script>
+
+     <script src="../static/main/js/jquery.ui.datepicker-zh-CN.js.js"></script>
 </head>
 
 <body>
 
 <div class="header">
     <h1><a href="#"><img src="../static/imp/images/logo.png" alt="实验设备借用管理系统"/></a></h1>
-    <div class="time">{% now "Y-m-d f" %}<Br/>你好:{{ request.user.username}} <a href="/logout/">退出系统</a></div>
+    <div class="time">{% now "Y-m-d f" %}<Br/>你好:{{ request.user.username}} &nbsp;&nbsp;&nbsp; <a href="/logout/">退出系统</a></div>
 
 </div>
 <div class="container-left">
@@ -24,9 +31,9 @@
         <li class="now">
             <a href="#">设备管理</a>
             <ul class="sub">
-
+<li><a href="/main/">设备列表</a></li>
                 {% if mgroup == 3 or mgroup == 2 %}
-                    <li><a href="/main/">设备列表</a></li>
+
                     <li><a href="#" data-href="/admin/main/macinsh/add/">新增设备</a></li>
                     <li><a href="#" data-href="/admin/main/machistoy/?shenhezhuanugtai__exact=1">借出纪录</a></li>
                     {% ifequal mgroup 2 %}
@@ -34,7 +41,9 @@
                             <a  href="#" data-href="/admin/main/machistoy/?shenheren__id__exact={{ user.id }}&shenhezhuanugtai__exact=0">借出审核</a>
                         </li>
                     {% endifequal %}
-                    {% ifequal mgroup 1 %}
+
+                {% endif %}
+            {% ifequal mgroup 1 %}
                         <li>
                             <a href="#" data-href="/admin/main/machistoy/?jiechuren__id__exact={{ user.id }}&shenhezhuanugtai__exact=1">已借入列表</a>
                         </li>
@@ -43,7 +52,6 @@
                         </li>
 
                     {% endifequal %}
-                {% endif %}
             </ul>
 
         </li>
@@ -55,7 +63,7 @@
                 <ul class="sub">
 
                     <li><a  href="#" data-href="/admin/main/manageuser/add/?yonghuzhonglei=2">新增管理员</a></li>
-                    <li><a href="#"  data-href="/admin/auth/user/?groups__id__exact=2">管理员列表</a></li>
+                    <li><a href="#"  data-href="/admin/auth/manageuser">管理员列表</a></li>
                        <li><a href="#" data-href="/admin/main/keshi/">科室管理</a></li>
                 </ul>
             </li>
@@ -64,7 +72,7 @@
                 <ul class="sub">
 
                     <li><a  href="#" data-href="/admin/main/manageuser/add/?yonghuzhonglei=1">新增用户</a></li>
-                    <li><a  href="#" data-href="/admin/auth/user/?groups__id__exact=1">用户列表</a></li>
+                    <li><a  href="#" data-href="/admin/auth/manageuser/?groups__id__exact=1">用户列表</a></li>
                 </ul>
             </li>
         {% endifequal %}
@@ -85,7 +93,7 @@
 <div class="container-right" id="contain">
 
     <iframe class="iframe" id="test" width="100%" height="100%" style="display: none;border:none"></iframe>
-    <div class="shebei-top">设备列表<span style="float: right">
+    <div class="shebei-top" style="text-align: left">设备列表<span style="float: right">
             <a href="{{ request.path }}">全部</a>丨
             <a href="{{ request.path }}?status=0" class="statue">借出</a>丨
             <a href="{{ request.path }}?status=1" class="statue">待审核</a> 丨
@@ -106,8 +114,7 @@
 
 
                 <li>
-                    <a href="{% if mgroup == 1 %}/add_form/?id=
-                        {{ foo.id }}{% else %}/admin/main/macinsh/{{ machine.id }}/{% endif %}"><img
+                    <a data-href="{% if mgroup == 1 %}/add_form/?id={{ machine.id }}{% else %}/admin/main/macinsh/{{ machine.id }}/{% endif %}"><img
                             src="{% if machine.image %}{{ machine.image.url }}{% endif %}" alt=""/>
                     <div class="info">
                         设备名称：{{ machine.name }}<br>
@@ -154,12 +161,12 @@
             <ul>
                 <li class="left-div">器材管理员</li>
                 <li><a data-href="/admin/main/manageuser/add/?yonghuzhonglei=2">新增管理员</a></li>
-                <li><a data-href="/admin/auth/user/?groups__id__exact=2">管理员列表</a></li>
+                <li><a data-href="/admin/main/manageuser/?yonghuzhonglei=2">管理员列表</a></li>
             </ul>
             <ul>
                 <li class="left-div">用户管理</li>
                 <li><a data-href="/admin/main/manageuser/add/?yonghuzhonglei=1">新增用户</a></li>
-                <li><a data-href="/admin/auth/user/?groups__id__exact=1">用户列表</a></li>
+                <li><a data-href="/admin/main/manageuser/?yonghuzhonglei=2">用户列表</a></li>
             </ul>
         {% endifequal %}
 
@@ -279,7 +286,7 @@ console.log(height);
 
 
         setPages()
-        $('.sub li').each(function (e) {
+        $('li').each(function (e) {
             $(this).click(function (a) {
 
                 $('.shebei-top').hide()
@@ -291,7 +298,15 @@ console.log(height);
                 console.log(href);
                 $(".iframe").attr("src", href);
                 $(".iframe").show();
-                window.setInterval("reinitIframe()", 200);
+                $(".iframe").contents().find(".vDateField").each(function () {
+                    $(this).datetimepicker({
+                   timeFormat: "HH:mm:ss",
+                         dateFormat: "yy-mm-dd"
+
+            });
+
+                })
+
 
             })
 

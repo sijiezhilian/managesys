@@ -2,6 +2,7 @@
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 from django.db.models import Q
+from django.http import HttpResponse
 from django.http import HttpResponseBadRequest
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, render_to_response
@@ -70,8 +71,53 @@ def new_form(request):
             a = request.user.groups.all()[0].id
         except IndexError:
             a = 1
+        b='''
+        <link type="text/css" href="http://code.jquery.com/ui/1.9.1/themes/smoothness/jquery-ui.css" rel="stylesheet" />
 
-        return render(request, "ex_change_form.html", {"form": addForm().as_ul(), "mgroup": a})
+    <link href="../static/main/css/jquery-ui-timepicker-addon.css" type="text/css" />
+    <script src="http://code.jquery.com/jquery-1.8.2.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="http://code.jquery.com/ui/1.9.1/jquery-ui.min.js"></script>
+    <script src="../static/main/js/jquery-ui-timepicker-addon.js" type="text/javascript"></script>
+
+
+    <script src="../static/main/js/zn.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+
+        jQuery(function () {
+            jQuery('#id_jiechushijian').datepicker({
+
+                dateFormat: "yy-mm-dd"
+            });
+
+        });
+        jQuery(function () {
+            jQuery('#id_guihuanshijian').datepicker({
+                dateFormat: "yy-mm-dd"
+            });
+
+        });
+
+    </script>
+        <style type="text/css">
+  ul, li {
+    list-style: none;
+    margin: 0;
+
+
+}
+    li{
+        margin-bottom: 20px;
+    }
+
+  </style>
+         <form method="post" style="text-align: left;padding-top: 30px;padding-left: 30px ;list-style: none;
+    margin: 0;">
+            %s
+                <input type="submit"/>
+            </form>
+        '''%(addForm().as_ul())
+        return HttpResponse(b)
     if request.method == "POST":
         form = addForm(request.POST)
         id = request.GET.get("id")
@@ -80,15 +126,18 @@ def new_form(request):
             jiechushijian = form.cleaned_data['jiechushijian']
             guihuanshijian = form.cleaned_data['guihuanshijian']
             beizhu = form.cleaned_data['beizhu']
-            MacHistoy.objects.create(mac_f=mac,
+
+            c=MacHistoy.objects.create(mac_f=mac,
                                      jiechushijian=jiechushijian,
                                      guihuanshijian=guihuanshijian,
                                      beizhu=beizhu,
                                      jiechuren=request.user.manageuser
+
                                      )
+
         else:
             return HttpResponseBadRequest(u"error")
-        return HttpResponseRedirect('/main/')
+        return HttpResponse('提交成功')
 
 
 @login_required
