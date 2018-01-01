@@ -28,7 +28,7 @@
 
 <div class="header">
     <h1><a href="#"><img src="../static/imp/images/logo.png" alt="实验设备借用管理系统"/></a></h1>
-    <div class="time">{% now "Y-m-d f" %}<Br/><a href="#">系统首页</a>&nbsp;|&nbsp;<a href="/logout/">退出系统</a></div>
+    <div class="time">{% now "Y-m-d f" %}<Br/><a href="/logout/">退出系统</a></div>
 
 </div>
 <div class="container-left">
@@ -123,6 +123,8 @@
                 <li class="left-div">器材管理员</li>
                 <li><a data-href="/admin/main/manageuser/add/?yonghuzhonglei=2">新增管理员</a></li>
                 <li><a data-href="/admin/auth/user/?groups__id__exact=2">管理员列表</a></li>
+                 <li><a data-href="/admin/main/keshi/">科室管理</a></li>
+
             </ul>
             <ul>
                 <li class="left-div">用户管理</li>
