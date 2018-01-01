@@ -119,7 +119,8 @@ def new_form(request):
                 <input type="submit"/>
             </form>
             <div style="text-align: left;padding-top: 30px;padding-left: 30px ;list-style: none;margin: 0;">
-            <img src="%s"></img>
+            <img src="%s" style="height: 200px;
+      width: 200px;"></img>
             %s
             <div>
         '''%(addForm().as_ul(),q.image.url,macForm(instance=q).as_ul())
