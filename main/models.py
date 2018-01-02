@@ -33,6 +33,7 @@ class ManageUser(models.Model):
         verbose_name = u"用户管理"
         verbose_name_plural = u"用户管理"
 
+
     def __unicode__(self):
         return self.name
     def save(self, force_insert=False, force_update=False, using=None,
@@ -72,6 +73,9 @@ class Macinsh(models.Model):
         verbose_name = u"设备管理"
         verbose_name_plural = u"设备管理"
 
+
+
+
     def __unicode__(self):
         return self.name
 class MacHistoy(models.Model):
@@ -87,6 +91,7 @@ class MacHistoy(models.Model):
     class Meta:
         verbose_name = u"借出信息"
         verbose_name_plural = u"借出信息"
+        permissions = (('view_feedback', 'view_feedback'),)
 
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):

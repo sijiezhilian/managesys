@@ -38,17 +38,20 @@
                     <li><a href="#" data-href="/admin/main/machistoy/?shenhezhuanugtai__exact=1">借出纪录</a></li>
                     {% ifequal mgroup 2 %}
                         <li>
-                            <a  href="#" data-href="/admin/main/machistoy/?shenheren__id__exact={{ user.id }}&shenhezhuanugtai__exact=0">借出审核</a>
+                            <a  href="#" data-href="/admin/main/machistoy/?shenheren__id__exact={{ request.user.manageuser.id }}&shenhezhuanugtai__exact=0">借出审核</a>
                         </li>
                     {% endifequal %}
 
                 {% endif %}
             {% ifequal mgroup 1 %}
                         <li>
-                            <a href="#" data-href="/admin/main/machistoy/?jiechuren__id__exact={{ user.id }}&shenhezhuanugtai__exact=1">已借入列表</a>
+                            <a href="#" data-href="/admin/main/machistoy/?jiechuren__id__exact={{request.user.manageuser.id }}&shenhezhuanugtai__exact=1">已借入列表</a>
                         </li>
                         <li>
-                            <a href="#" data-href="/admin/main/machistoy/?jiechuren__id__exact={{ user.id }}&shenhezhuanugtai__exact=2">已归还列表</a>
+                            <a href="#" data-href="/admin/main/machistoy/?jiechuren__id__exact={{ request.user.manageuser.id }}&shenhezhuanugtai__exact=2">已归还列表</a>
+                        </li>
+                        <li>
+                            <a href="#" data-href="/admin/main/machistoy/?jiechuren__id__exact={{ request.user.manageuser.id }}&shenhezhuanugtai__exact=0">待审核列表</a>
                         </li>
 
                     {% endifequal %}
@@ -128,99 +131,7 @@
     </div>
 
 </div>
-<div class="med" style="display: none">
-    <div class="left">
-        <ul>
 
-            <li class="left-div">设备管理</li>
-            <li><a data-href="/admin/main/macinsh/">设备列表</a></li>
-            {% if mgroup == 3 or mgroup == 2 %}
-
-                <li><a data-href="/admin/main/macinsh/add/">新增设备</a></li>
-                <li><a data-href="/admin/main/machistoy/?shenhezhuanugtai__exact=1">借出纪录</a></li>
-            {% endif %}
-
-            {% ifequal mgroup 2 %}
-                <li><a data-href="/admin/main/machistoy/shenheren__id__exact={{ user.id }}&shenhezhuanugtai__exact=0">借出审核</a>
-                </li>
-            {% endifequal %}
-            {% ifequal mgroup 1 %}
-                <li><a data-href="/admin/main/machistoy/jiechuren__id__exact={{ user.id }}&shenhezhuanugtai__exact=1">已借入列表</a>
-                </li>
-                <li><a data-href="/admin/main/machistoy/jiechuren__id__exact={{ user.id }}&shenhezhuanugtai__exact=2">已归还列表</a>
-                </li>
-
-            {% endifequal %}
-
-
-        </ul>
-
-        {% ifequal mgroup 3 %}
-
-
-            <ul>
-                <li class="left-div">器材管理员</li>
-                <li><a data-href="/admin/main/manageuser/add/?yonghuzhonglei=2">新增管理员</a></li>
-                <li><a data-href="/admin/main/manageuser/?yonghuzhonglei=2">管理员列表</a></li>
-            </ul>
-            <ul>
-                <li class="left-div">用户管理</li>
-                <li><a data-href="/admin/main/manageuser/add/?yonghuzhonglei=1">新增用户</a></li>
-                <li><a data-href="/admin/main/manageuser/?yonghuzhonglei=2">用户列表</a></li>
-            </ul>
-        {% endifequal %}
-
-        <ul>
-            <li class="left-div"> {% if mgroup == 3 or mgroup == 2 %}管理员设置{% elif mgroup == 1 %}个人资料{% endif %}</li>
-            <li><a data-href="/admin/main/manageuser/{{ request.user.manageuser.id }}/">资料设置</a></li>
-            <li><a data-href="/admin/password_change/">密码修改</a></li>
-        </ul>
-
-
-    </div>
-    <div class="right">
-
-        <iframe class="iframe" width="100%" height="100%" style="display: none"></iframe>
-
-        <div class="shebei-top">设备列表<span style="float: right">
-            <a href="{{ request.path }}">全部</a>丨
-            <a href="{{ request.path }}?status=1" class="statue">借出</a>丨
-            <a href="{{ request.path }}?status=0"  class="statue">在库</a></span></div>
-
-        <div class="content">
-            <form id="changelist-search" action="" method="get" style="text-align: left">
-                <div><!-- DIV needed for valid HTML -->
-                    <label for="searchbar"><img src="/static/admin/img/icon_searchbox.png" alt="Search"></label>
-                    <input type="text" size="40" name="q" value="" id="searchbar">
-                    <input type="submit" value="搜索">
-
-
-                </div>
-            </form>
-            <ul class="item">
-                {% for foo in  machines %}
-                    <li><a href="{% if mgroup == 1 %}/add_form/?id=
-                        {{ foo.id }}{% else %}/admin/main/macinsh/{{ foo.id }}/{% endif %}">
-                        <div class="info-top"><img src="{% if foo.image %}{{ foo.image.url }}{% endif %}"/></div>
-                        <div class="info-bottom">
-                            <div class="item-name">{{ foo.name }}</div>
-                            <div class="item-style">{{ foo.get_zhuangtai_display }}</div>
-                        </div>
-                    </a>
-                    </li>
-                {% endfor %}
-
-
-            </ul>
-
-        </div>
-        <div class="fen">
-            <div id="page"></div>
-
-
-        </div>
-    </div>
-</div>
 <script>
     var len = {{ Len|safe }};
     function changeURLArg(url, arg, arg_val) {
