@@ -36,6 +36,6 @@ strong,b{font-weight:normal;}
 .container-right .title{width:90%;height:40px;text-align:left;line-height:30px;font-size:16px;margin:20px auto 10px auto;}
 .container-right .content{width:90%;margin:0 auto;}
 .container-right .content ul.shebei-list{width:100%;}
-.container-right .content ul.shebei-list li{width:33%;margin-bottom:20px;float:left;text-align:left;line-height:28px;}
+.container-right .content ul.shebei-list li{width:25%;margin-bottom:20px;float:left;text-align:left;line-height:28px;}
 .container-right .content ul.shebei-list li img{width:80%;height:auto;padding:1px;border:1px solid #ccc;}
 .container-right .content .info{font-size:14px;line-height:23px;padding:10px 0 0;}
