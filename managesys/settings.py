@@ -92,10 +92,11 @@ DATABASES = {
         'PORT':'3306',
     }
 }
-EMAIL_PORT=587
+
 EMAIL_HOST="smtp.163.com"
 EMAIL_HOST_USER="p564398853@163.com"
 EMAIL_HOST_PASSWORD="qwerasdf1"
+
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 LANGUAGE_CODE = 'zh-CN'
