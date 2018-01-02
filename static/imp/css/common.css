@@ -32,7 +32,7 @@ strong,b{font-weight:normal;}
 .container-left ul.nav-left li ul.sub li{width:100%;height:30px;min-height:30px;line-height:30px;margin:0;}
 .container-left ul.nav-left li ul.sub li a:link,.container-left ul.nav-left li ul.sub li a:visited{width:100%;height:30px;line-height:30px;background:#6ea0fd;}
 .container-left ul.nav-left li ul.sub li a:hover{background:#87b1fe;}
-.container-right{width:83%;float:left;height: 500px;}
+.container-right{width:83%;float:left;height: 660px;}
 .container-right .title{width:90%;height:40px;text-align:left;line-height:30px;font-size:16px;margin:20px auto 10px auto;}
 .container-right .content{width:90%;margin:0 auto;}
 .container-right .content ul.shebei-list{width:100%;}

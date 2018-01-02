@@ -44,7 +44,7 @@ def sysmain(request):
     if zhuangtai:
         contact_list = Macinsh.objects.filter(zhuangtai=zhuangtai)
     if (q != None):
-        contact_list = contact_list.filter(Q(name=q) | Q(bianhao=q) | Q(xinghao=q))
+        contact_list = contact_list.filter(Q(name__contains=q) | Q(bianhao__contains=q) | Q(xinghao__contains=q))
     paginator = Paginator(contact_list, 8)  # Show 25 contacts per page
 
     try:

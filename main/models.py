@@ -36,10 +36,17 @@ class ManageUser(models.Model):
 
     def __unicode__(self):
         return self.name
+
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
-        user = User.objects.create_user(self.yonghuming, self.youxiang, '123456')
-        self.user=user
+
+        if(self.user==None):
+            user = User.objects.create_user(self.yonghuming, self.youxiang, '123456')
+            self.user = user
+        else:
+            self.user.username=self.yonghuming
+            self.user.save()
+
 
 
 

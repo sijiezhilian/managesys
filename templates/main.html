@@ -104,8 +104,8 @@
     <div class="content">
      <form id="changelist-search" action="" method="get" style="text-align: left">
                 <div><!-- DIV needed for valid HTML -->
-                    <label for="searchbar"><img src="/static/admin/img/icon_searchbox.png" alt="Search"></label>
-                    <input type="text" size="40" name="q" value="" id="searchbar">
+                    <label for="searchbar"></label>
+                    <input type="text" size="20" name="q" value="" id="searchbar">
                     <input type="submit" value="搜索">
 
 
@@ -213,7 +213,10 @@ console.log(height);
                 console.log(href);
                 $(".iframe").attr("src", href);
                 $(".iframe").show();
+                window.setTimeout(reinitIframe(),2000);
+
                 $(".iframe").contents().find(".vDateField").each(function () {
+
                     $(this).datetimepicker({
                    timeFormat: "HH:mm:ss",
                          dateFormat: "yy-mm-dd"
