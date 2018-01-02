@@ -38,10 +38,11 @@ def index(request):
 @login_required
 def sysmain(request):
 
-    zhuangtai = request.GET.get("status", 0)
+    zhuangtai = request.GET.get("status", None)
     q = request.GET.get("q", None)
-
-    contact_list = Macinsh.objects.filter(zhuangtai=zhuangtai)
+    contact_list = Macinsh.objects.all()
+    if zhuangtai:
+        contact_list = Macinsh.objects.filter(zhuangtai=zhuangtai)
     if (q != None):
         contact_list = contact_list.filter(Q(name=q) | Q(bianhao=q) | Q(xinghao=q))
     paginator = Paginator(contact_list, 8)  # Show 25 contacts per page
@@ -116,8 +117,7 @@ def new_form(request):
     }
 
   </style>
-         <form class="jiechu" method="post" style="text-align: left;padding-top: 30px;padding-left: 30px ;list-style: none;
-    margin: 0;">
+         <form class="jiechu" method="post">
             %s
                 <input type="submit"/>
             </form>
