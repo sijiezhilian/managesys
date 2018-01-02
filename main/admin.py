@@ -34,7 +34,6 @@ class ManageUserAdmin(admin.ModelAdmin):
 
 
 
-
 @admin.register(models.keshi)
 class KeshiAdmin(admin.ModelAdmin):
     list_display = ("keshi",)
@@ -52,11 +51,23 @@ class MacHistoyAdmin(ImportExportModelAdmin):
         ('guihuanshijian', DateRangeFilter),
     )
 
+    def get_actions(self, request):
+        actions = super(MacHistoyAdmin, self).get_actions(request)
+        if 'delete_selected' in actions:
+            del actions['delete_selected']
+        return actions
+
     def get_readonly_fields(self, request, obj=None):
         if not request.user.is_superuser and request.user.has_perm('main.view_feedback'):
             return [f.name for f in self.model._meta.fields]
 
         return self.readonly_fields
+    def has_delete_permission(self, request, obj=None):
+        if obj:
+            if obj.jiechuren!=request.user.manageuser or obj.shenhezhuanugtai!=0:
+                return False
+        return super(MacHistoyAdmin, self).has_delete_permission(request,obj)
+
 
 @admin.register(models.Macinsh)
 class MacinshAdmin(admin.ModelAdmin):

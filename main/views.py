@@ -112,10 +112,11 @@ def new_form(request):
         margin-bottom: 20px;
     }
     form li
-    {display: inline-block;}
+    {display: inline-block;
+    }
 
   </style>
-         <form method="post" style="text-align: left;padding-top: 30px;padding-left: 30px ;list-style: none;
+         <form class="jiechu" method="post" style="text-align: left;padding-top: 30px;padding-left: 30px ;list-style: none;
     margin: 0;">
             %s
                 <input type="submit"/>
