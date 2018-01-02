@@ -114,9 +114,9 @@ class MacHistoy(models.Model):
         if self.shenhezhuanugtai == 3:
             self.mac_f.zhuangtai = 0
         self.mac_f.save()
-        #if(self.shifouyuqi==True):
-         #   send_mail(self.jiechuren.name+u"提交了申请请注意审核", self.jiechuren.name+u"提交了申请请注意审核", 'p564398853@163.com',
-          #            [self.shenheren.youxiang], fail_silently=False)
+        if(self.shifouyuqi==True):
+            send_mail(self.jiechuren.name+u"提交了申请请注意审核", self.jiechuren.name+u"提交了申请请注意审核", 'p564398853@163.com',
+                      [self.shenheren.youxiang], fail_silently=False)
 
         return models.Model.save(self, force_insert=force_insert, force_update=force_update, using=using,
                                  update_fields=update_fields)
