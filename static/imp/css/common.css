@@ -1,5 +1,5 @@
 @charset "utf-8";
-html{width:100%;height:100%;margin:0;padding:0;overflow-x:hidden;}
+html{width:100%;height:100%;margin:0;padding:0;overflow:hidden;overflow-x:hidden;}
 body{width:100%;margin:0 auto;background:#fff url('../images/bodybg.jpg') center top no-repeat;text-align:center;font:14px "Microsoft Yahei","微软雅黑",Arial,"宋体",sans-serif;height:100%;color:#555;width:100%;padding:0;_overflow-x:hidden;}
 body.homepage{ margin:0 auto;background:#fff;}
 a:link,a:visited{color:#363636;text-decoration:none;}
@@ -37,5 +37,20 @@ strong,b{font-weight:normal;}
 .container-right .content{width:90%;margin:0 auto;}
 .container-right .content ul.shebei-list{width:100%;}
 .container-right .content ul.shebei-list li{width:25%;margin-bottom:20px;float:left;text-align:left;line-height:28px;}
-.container-right .content ul.shebei-list li img{width:80%;height:auto;padding:1px;border:1px solid #ccc;}
+.container-right .content ul.shebei-list li img{width:auto;height:150px;padding:1px;border:1px solid #ccc;}
 .container-right .content .info{font-size:14px;line-height:23px;padding:10px 0 0;}
+form#changelist-search{position:relative;top:-45px;left:20px;}
+.shebei-top{font-size:18px;}
+.shebei-top span a:link,.shebei-top span a:visited{font-size:12px;}
+.fen{background:none;font-size:12px;}
+#content h1{font-weight:normal;font-size:18px;padding:10px 0 20px 0;}
+.module{border:1px solid #eee;}
+.required label, label.required{font-weight: normal !important;}
+.aligned label{font-size:14px;width:15em;}
+input[type=text], input[type=password], input[type=email], input[type=url], input[type=number], textarea, select, .vTextField{padding:3px 7px;font-size:12px;}
+.form-row{padding:4px 12px;}
+.vTextField{width:30em;}
+.submit-row{background:none;border:none;}
+
+
+
