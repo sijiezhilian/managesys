@@ -855,7 +855,7 @@ form#changelist-search{position:relative;top:-45px;left:20px;}
 .shebei-top{font-size:18px;}
 .shebei-top span a:link,.shebei-top span a:visited{font-size:12px;}
 .fen{background:none;font-size:12px;}
-#content h1{font-weight:normal;font-size:18px;padding:10px 0 20px 0;height:50px;color:#337ab7;}
+#content h1{font-weight:normal;font-size:18px;padding:10px 0 20px 0;height:30px;color:#337ab7;}
 .module{border:1px solid #eee;}
 .required label, label.required{font-weight: normal !important;}
 .aligned label{font-size:14px;width:15em;}
