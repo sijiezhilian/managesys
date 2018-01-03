@@ -39,9 +39,10 @@ strong,b{font-weight:normal;}
 .container-right .content ul.shebei-list li{width:25%;margin-bottom:20px;float:left;text-align:left;line-height:28px;}
 .container-right .content ul.shebei-list li img{width:auto;height:150px;padding:1px;border:1px solid #ccc;}
 .container-right .content .info{font-size:14px;line-height:23px;padding:10px 0 0;}
-form#changelist-search{position:relative;top:-45px;left:20px;}
-.shebei-top{font-size:18px;}
+form#changelist-search{position:relative;top:-45px;left:30px;width:300px;}
+.shebei-top{font-size:18px;color:#337ab7;}
 .shebei-top span a:link,.shebei-top span a:visited{font-size:12px;}
+.shebei-top span{font-size:12px;}
 .fen{background:none;font-size:12px;}
 #content h1{font-weight:normal;font-size:18px;padding:10px 0 20px 0;}
 .module{border:1px solid #eee;}
