@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from import_export import fields
 from import_export.admin import ImportExportModelAdmin
 from import_export.fields import Field
+from import_export.formats import base_formats
 from import_export.widgets import ForeignKeyWidget
 
 import models
@@ -18,7 +19,14 @@ class hisResource(resources.ModelResource):
     shenheren = Field(attribute='shenheren',column_name=u'审核人',widget=ForeignKeyWidget(models.ManageUser, 'name'))
     mac_f=Field(attribute='mac_f',column_name=u'机器名',widget=ForeignKeyWidget(models.Macinsh, 'name'))
     beizhu= Field(attribute='beizhu', column_name=u'备注')
+    DEFAULT_FORMATS = (
+
+        base_formats.XLS,
+        base_formats.XLSX,
+        base_formats.HTML,
+    )
     class Meta:
+
         model = models.MacHistoy
         export_order = ('jiechushijian', 'guihuanshijian', 'beizhu', 'mac_f', "jiechuren", "shenheren",)
         fields = ('jiechushijian', 'guihuanshijian', 'beizhu', 'mac_f', "jiechuren", "shenheren",)

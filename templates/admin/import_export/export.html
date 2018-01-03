@@ -4,27 +4,32 @@
 {% load import_export_tags %}
 
 {% block breadcrumbs_last %}
-{% trans "Export" %}
-{% endblock %}
+{% trans "导出表格" %}
+{% endblock %}{% block content_title %}<h1>导出</h1>{% endblock %}
 
 {% block content %}
 <form action="" method="POST">
   {% csrf_token %}
 
     <fieldset class="module aligned">
-      {% for field in form %}
-        <div class="form-row">
-          {{ field.errors }}
+      <div class="form-row">
 
-          {{ field.label_tag }}
 
-          {{ field }}
+          <label for="id_file_format">文件格式:</label>
 
-          {% if field.field.help_text %}
-          <p class="help">{{ field.field.help_text|safe }}</p>
-          {% endif %}
+          <select id="id_file_format" name="file_format">
+<option value="" selected="selected">---</option>
+
+<option value="1">xls</option>
+<option value="2">xlsx</option>
+
+<option value="7">html</option>
+</select>
+
+
         </div>
-      {% endfor %}
+        </div>
+
     </fieldset>
 
     <div class="submit-row">
