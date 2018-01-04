@@ -62,9 +62,8 @@
 <h1>设备详情</h1>
 <div style="text-align: left;padding-top: 30px;padding-left: 30px ;list-style: none;margin: 0;">
     <div class="macimage">
-
-        {{ form2 }}
-     <img src="{{ q.image.url }}" style="height: 100%;width: 100%"/>
+        <div class="detail">  {{ form2 }}</div>
+        <div class="photo-shebei"><img src="{{ q.image.url }}" style="height: 100%;width: 100%"/></div>
 {% if q.zhuangtai == 2 %}
 
 
