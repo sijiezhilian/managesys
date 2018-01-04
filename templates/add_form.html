@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<link type="text/css" href="http://code.jquery.com/ui/1.9.1/themes/smoothness/jquery-ui.css" rel="stylesheet"/>
+
+<link href="../static/main/css/jquery-ui-timepicker-addon.css" type="text/css"/>
+<script src="http://code.jquery.com/jquery-1.8.2.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="http://code.jquery.com/ui/1.9.1/jquery-ui.min.js"></script>
+<script src="../static/main/js/jquery-ui-timepicker-addon.js" type="text/javascript"></script>
+
+
+<script src="../static/main/js/zn.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+
+    function check() {
+        if ($('#id_jiechushijian').val() == "" || $('#id_guihuanshijian').val() == "") {
+            alert('时间不能为空')
+            return false;
+        }
+        return true
+    }
+
+
+    jQuery(function () {
+        jQuery('#id_jiechushijian').datepicker({
+
+            dateFormat: "yy-mm-dd"
+        });
+
+    });
+    jQuery(function () {
+        jQuery('#id_guihuanshijian').datepicker({
+            dateFormat: "yy-mm-dd"
+        });
+
+    });
+
+</script>
+<style type="text/css">
+    ul, li {
+        list-style: none;
+        margin: 0;
+
+    }
+
+    li {
+        margin-bottom: 20px;
+    }
+
+    form li {
+        display: inline-block;
+    }
+
+</style>
+<body>
+
+
+<h1>设备详情</h1>
+<div style="text-align: left;padding-top: 30px;padding-left: 30px ;list-style: none;margin: 0;">
+    <div class="macimage">
+
+        {{ form2 }}
+     <img src="{{ q.image.url }}" style="height: 100%;width: 100%"/>
+{% if q.zhuangtai == 2 %}
+
+
+        <form class="jiechu" method="post" onSubmit="return check()">
+                <h1>借入此设备</h1>
+                {{ form1 }}
+                <input type=" submit"/>
+        </form>
+        {% endif %}
+        <div>
+</body>
+</html>

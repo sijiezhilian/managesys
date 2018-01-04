@@ -74,60 +74,9 @@ def new_form(request):
             a = 1
         id=request.GET.get("id")
         q=Macinsh.objects.get(id=id)
-        b='''
-        <link type="text/css" href="http://code.jquery.com/ui/1.9.1/themes/smoothness/jquery-ui.css" rel="stylesheet" />
 
-    <link href="../static/main/css/jquery-ui-timepicker-addon.css" type="text/css" />
-    <script src="http://code.jquery.com/jquery-1.8.2.min.js" type="text/javascript"></script>
-    <script type="text/javascript" src="http://code.jquery.com/ui/1.9.1/jquery-ui.min.js"></script>
-    <script src="../static/main/js/jquery-ui-timepicker-addon.js" type="text/javascript"></script>
-
-
-    <script src="../static/main/js/zn.js" type="text/javascript"></script>
-
-    <script type="text/javascript">
-
-        jQuery(function () {
-            jQuery('#id_jiechushijian').datepicker({
-
-                dateFormat: "yy-mm-dd"
-            });
-
-        });
-        jQuery(function () {
-            jQuery('#id_guihuanshijian').datepicker({
-                dateFormat: "yy-mm-dd"
-            });
-
-        });
-
-    </script>
-        <style type="text/css">
-  ul, li {
-    list-style: none;
-    margin: 0;
-
-
-}
-    li{
-        margin-bottom: 20px;
-    }
-    form li
-    {display: inline-block;
-    }
-
-  </style>
-         <form class="jiechu" method="post">
-            %s
-                <input type="submit"/>
-            </form>
-            <div style="text-align: left;padding-top: 30px;padding-left: 30px ;list-style: none;margin: 0;">
-            <img src="%s" style="height: 200px;
-      width: 200px;"></img>
-            %s
-            <div>
-        '''%(addForm().as_ul(),q.image.url,macForm(instance=q).as_ul())
-        return HttpResponse(b)
+        #b=%(addForm().as_ul(),q.image.url,macForm(instance=q).as_ul())
+        return render(request,'add_form.html',{"form1":addForm().as_ul(),"q":q,"form2":macForm(instance=q).as_ul()})
     if request.method == "POST":
         form = addForm(request.POST)
         id = request.GET.get("id")

@@ -80,6 +80,15 @@ class Macinsh(models.Model):
         verbose_name = u"设备管理"
         verbose_name_plural = u"设备管理"
 
+    def image_tag(self):
+        return u'<img src="%s" />' %self.image.url
+
+    image_tag.short_description = u'缩略图'
+    image_tag.allow_tags = True
+
+
+
+
 
 
 

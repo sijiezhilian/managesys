@@ -24,6 +24,8 @@ ul.login li input.textinput{width:217px;height:27px;background:url(../images/bg_
 ul.login li input.textinput1{width:86px;height:27px;background:url(../images/bg_input1.gif) 0 0 no-repeat;border:none;padding-left:10px;}
 ul.login li img{vertical-align:top;position:relative;left:5px;}
 ul.login li input.submit{width:92px;height:31px;background:url(../images/bg_submit.gif) 0 0 no-repeat;border:none;position:relative;left:7px;cursor:pointer;}
+.resign{display:inline-block;width:92px;height:31px;background:url(../images/bg_submit1.gif) 0 0 no-repeat;border:none;position:relative;left:7px;cursor:pointer;vertical-align: top;margin-left: 5px;}
+
 
 
 

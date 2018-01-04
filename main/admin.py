@@ -1,4 +1,4 @@
-#coding:utf-8
+# coding:utf-8
 from daterange_filter.filter import DateRangeFilter
 from django.contrib import admin
 from django.contrib.auth.models import User
@@ -12,46 +12,51 @@ from import_export.widgets import ForeignKeyWidget
 import models
 from import_export import resources
 
+
 class hisResource(resources.ModelResource):
-    jiechushijian=Field(attribute='jiechushijian',column_name=u'借出时间')
+    jiechushijian = Field(attribute='jiechushijian', column_name=u'借出时间')
     guihuanshijian = Field(attribute='guihuanshijian', column_name=u'归还时间')
-    jiechuren=Field(attribute='jiechuren',readonly=True,column_name=u'借出人',widget=ForeignKeyWidget(models.ManageUser, 'name'))
-    shenheren = Field(attribute='shenheren',column_name=u'审核人',widget=ForeignKeyWidget(models.ManageUser, 'name'))
-    mac_f=Field(attribute='mac_f',column_name=u'机器名',widget=ForeignKeyWidget(models.Macinsh, 'name'))
-    beizhu= Field(attribute='beizhu', column_name=u'备注')
+    jiechuren = Field(attribute='jiechuren', readonly=True, column_name=u'借出人',
+                      widget=ForeignKeyWidget(models.ManageUser, 'name'))
+    shenheren = Field(attribute='shenheren', column_name=u'审核人', widget=ForeignKeyWidget(models.ManageUser, 'name'))
+    mac_f = Field(attribute='mac_f', column_name=u'机器名', widget=ForeignKeyWidget(models.Macinsh, 'name'))
+    beizhu = Field(attribute='beizhu', column_name=u'备注')
     DEFAULT_FORMATS = (
 
         base_formats.XLS,
         base_formats.XLSX,
         base_formats.HTML,
     )
-    class Meta:
 
+    class Meta:
         model = models.MacHistoy
         export_order = ('jiechushijian', 'guihuanshijian', 'beizhu', 'mac_f', "jiechuren", "shenheren",)
         fields = ('jiechushijian', 'guihuanshijian', 'beizhu', 'mac_f', "jiechuren", "shenheren",)
+
+
 @admin.register(models.ManageUser)
 class ManageUserAdmin(admin.ModelAdmin):
     exclude = ['user']
-    list_display = ('yonghuming',"xuehao","gonghao","shouji","youxiang")
-    search_fields=['yonghuming',"xuehao","gonghao","shouji","youxiang"]
+    list_display = ('yonghuming', "xuehao", "gonghao", "shouji", "youxiang")
+    search_fields = ['yonghuming', "xuehao", "gonghao", "shouji", "youxiang"]
+
     def get_readonly_fields(self, request, obj=None):
-        if not request.user.is_superuser and request.user.groups.all()[0].id==1:
+        if not request.user.is_superuser and request.user.groups.all()[0].id == 1:
             return ['yonghuzhonglei']
 
-        return super(ManageUserAdmin, self).get_readonly_fields(request,obj)
+        return super(ManageUserAdmin, self).get_readonly_fields(request, obj)
+
     def get_fields(self, request, obj=None):
-        l=super(ManageUserAdmin, self).get_fields(request, obj)
-        if not request.user.is_superuser and request.user.groups.all()[0].id==1:
+        l = super(ManageUserAdmin, self).get_fields(request, obj)
+        if not request.user.is_superuser and request.user.groups.all()[0].id == 1:
             if "keshi_f" in l:
                 l.remove("keshi_f")
-            if obj.xuehao!="" and "gonghao" in l:
+            if obj.xuehao != "" and "gonghao" in l:
                 l.remove("gonghao")
-            if obj.gonghao!="" and "xuehao" in l:
+            if obj.gonghao != "" and "xuehao" in l:
                 l.remove("xuehao")
 
         return l
-
 
 
 @admin.register(models.keshi)
@@ -62,9 +67,10 @@ class KeshiAdmin(admin.ModelAdmin):
 
 @admin.register(models.MacHistoy)
 class MacHistoyAdmin(ImportExportModelAdmin):
-    resource_class=hisResource
-    list_display = ("jiechushijian", "guihuanshijian", "shifouyuqi", "beizhu","jiechuren","shenheren","shenhezhuanugtai")
-    search_fields = ["shifouyuqi", "beizhu","jiechuren","shenheren"]
+    resource_class = hisResource
+    list_display = (
+    "jiechushijian", "guihuanshijian", "shifouyuqi", "beizhu", "jiechuren", "shenheren", "shenhezhuanugtai")
+    search_fields = ["shifouyuqi", "beizhu", "jiechuren", "shenheren"]
     list_filter = (
         'shenhezhuanugtai',
         ('jiechushijian', DateRangeFilter),  # this is a tuple
@@ -82,17 +88,29 @@ class MacHistoyAdmin(ImportExportModelAdmin):
             return [f.name for f in self.model._meta.fields]
 
         return self.readonly_fields
+
     def has_delete_permission(self, request, obj=None):
         if obj:
-            if obj.jiechuren!=request.user.manageuser or obj.shenhezhuanugtai!=0:
+            if obj.jiechuren != request.user.manageuser or obj.shenhezhuanugtai != 0:
                 return False
-        return super(MacHistoyAdmin, self).has_delete_permission(request,obj)
+        return super(MacHistoyAdmin, self).has_delete_permission(request, obj)
 
 
 @admin.register(models.Macinsh)
 class MacinshAdmin(admin.ModelAdmin):
     list_display = ("name", "bianhao", "zhuangtai")
     search_fields = ["name", "bianhao", "xinghao"]
+    fields = ['name',
+              'bianhao',
+              'xinghao',
+              'gongneng',
+              'zhuyishiqiang',
+              'beizhu',
+              'image',
+              'image_tag',
+              'zhuangtai',
+              'keshi_f', ]
+    readonly_fields = ('image_tag',)
 
 
 from django.contrib import admin
