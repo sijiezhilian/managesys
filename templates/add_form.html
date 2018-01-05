@@ -48,19 +48,27 @@
     }
 
     li {
-        margin-bottom: 20px;
+        margin-bottom: 12px;
     }
 
     form li {
         display: inline-block;
     }
+h1.title{width:100%;font-size:18px;font-weight:normal;text-indent:10px;margin:20px 0;float:left;clear:both;color:#337ab7;border-bottom:1px solid #ddd;padding-bottom:10px;}
+.macimage{width:100%;}
+.macimage .detail{width:60%;float:left;}
+.macimage .detail li label{width:166px;display:inline-block;text-align:right;padding-right:10px;}
+.macimage .detail li input{padding:5px 10px;font-size:14px;}
+.macimage .photo-shebei{width:30%:float:left;}
+form.jiechu{float:left;width:100%;}
+form.jiechu input{font-size:14px;padding:5px 10px;}    
 
 </style>
 <body>
 
 
-<h1>设备详情</h1>
-<div style="text-align: left;padding-top: 30px;padding-left: 30px ;list-style: none;margin: 0;">
+<h1 class="title">设备详情</h1>
+<div style="text-align: left;padding-top: 0px;padding-left: 30px ;list-style: none;margin: 0;">
     <div class="macimage">
         <div class="detail">  {{ form2 }}</div>
         <div class="photo-shebei"><img src="{{ q.image.url }}" style="width:200px;height:auto;"/></div>
@@ -68,7 +76,7 @@
 
 
         <form class="jiechu" method="post" onSubmit="return check()">
-                <h1>借入此设备</h1>
+                <h1 class="title">借出此设备</h1>
                 {{ form1 }}
                 <input type="submit"/>
         </form>
