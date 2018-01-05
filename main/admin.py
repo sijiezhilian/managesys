@@ -37,8 +37,9 @@ class hisResource(resources.ModelResource):
 @admin.register(models.ManageUser)
 class ManageUserAdmin(admin.ModelAdmin):
     exclude = ['user']
-    list_display = ('yonghuming', "xuehao", "gonghao", "shouji", "youxiang")
+    list_display = ('yonghuming', "shouji", "youxiang",'keshi_f')
     search_fields = ['yonghuming', "xuehao", "gonghao", "shouji", "youxiang"]
+
 
     def get_readonly_fields(self, request, obj=None):
         if not request.user.is_superuser and request.user.groups.all()[0].id == 1:
