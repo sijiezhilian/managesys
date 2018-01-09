@@ -6,7 +6,21 @@ from django.db import models
 
 # Create your models here.
 from mail import sendmail
+import os
+from uuid import uuid4
 
+def path_and_rename(path):
+    def wrapper(instance, filename):
+        ext = filename.split('.')[-1]
+        # get filename
+        if instance.pk:
+            filename = '{}.{}'.format(instance.pk, ext)
+        else:
+            # set filename as random string
+            filename = '{}.{}'.format(uuid4().hex, ext)
+        # return the whole path to the file
+        return os.path.join(path, filename)
+    return wrapper
 
 class keshi(models.Model):
     keshi=models.CharField(u"科室",max_length=255)
@@ -72,7 +86,7 @@ class Macinsh(models.Model):
     gongneng=models.CharField(u'功能说明',max_length=255,blank=True)
     zhuyishiqiang=models.CharField(u'注意事项',max_length=255,blank=True)
     beizhu = models.CharField(u'备注', max_length=255, blank=True)
-    image=models.ImageField(u"设备图片",upload_to="images",blank=True,null=True)
+    image=models.ImageField(u"设备图片",upload_to=path_and_rename('images'),blank=True,null=True)
     zhuangtaichoices=((0,u"在库"),(1,u'借出'))
     zhuangtai=models.IntegerField(u"设备状态",default=0,choices=zhuangtaichoices)
     keshi_f = models.ForeignKey(keshi, verbose_name='所属科室',blank=True,null=True)
@@ -85,6 +99,16 @@ class Macinsh(models.Model):
 
     image_tag.short_description = u'缩略图'
     image_tag.allow_tags = True
+
+    def save(self, force_insert=False, force_update=False, using=None,
+             update_fields=None):
+        pass
+        #self.image.name=""
+
+        return super(Macinsh, self).save(force_insert=force_insert, force_update=force_update, using=using,
+             update_fields=update_fields)
+
+
 
 
 
