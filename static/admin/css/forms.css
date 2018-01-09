@@ -407,3 +407,4 @@ input[type=text], input[type=password], input[type=email], input[type=url], inpu
 .form-row{padding:4px 12px;}
 .vTextField{width:30em;}
 .submit-row{background:none;border:none;}
+.field-image_tag img{width:50%;height:auto;}
