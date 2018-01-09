@@ -2,7 +2,7 @@
 html{width:100%;height:100%;margin:0;padding:0;overflow:hidden;overflow-x:hidden;}
 body{width:100%;margin:0 auto;background:#fff url('../images/bodybg.jpg') center top no-repeat;text-align:center;font:14px "Microsoft Yahei","微软雅黑",Arial,"宋体",sans-serif;height:100%;color:#555;width:100%;padding:0;_overflow-x:hidden;}
 body.homepage{ margin:0 auto;background:#fff;}
-a:link,a:visited{color:#363636;text-decoration:none;}
+a:link,a:visited{color:#363636;text-decoration:none;cursor:pointer;}
 a:hover{color:#0c8bf1;}
 .sub a{background: #6ea0fd;}
 img,a img{border:none;vertical-align:middle;}
@@ -39,7 +39,7 @@ strong,b{font-weight:normal;}
 .container-right .content ul.shebei-list li{width:25%;margin-bottom:20px;float:left;text-align:left;line-height:28px;}
 .container-right .content ul.shebei-list li img{width:auto;height:150px;padding:1px;border:1px solid #ccc;}
 .container-right .content .info{font-size:14px;line-height:23px;padding:10px 0 0;}
-form#changelist-search{position:relative;top:-45px;left:30px;width:300px;}
+form#changelist-search{position:relative;top:-48px;left:30px;width:300px;}
 .shebei-top{font-size:18px;color:#337ab7;}
 .shebei-top span a:link,.shebei-top span a:visited{font-size:12px;}
 .shebei-top span{font-size:12px;}
